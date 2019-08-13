@@ -17,6 +17,8 @@
 FROM gcr.io/oss-fuzz-base/base-builder
 MAINTAINER call132call132@gmail.com
 RUN apt-get update && apt-get install -y make autoconf automake libtool
-RUN git clone --depth 1 http://github.com/eethan1/testfoross-fuzz practice     # or use other version control
+RUN git clone --depth 1 http://github.com/eethan1/testfoross-fuzz     # or use other version control
+RUN mv testfoross-fuzz/target_fuzzee ./target_fuzzee
 WORKDIR target_fuzzee
-COPY build.sh libfuzzer_practice/*.cc $SRC/
+COPY build.sh ./*.cc $SRC/
+

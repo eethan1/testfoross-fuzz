@@ -24,11 +24,10 @@
 # build fuzzers
 # e.g.
 $CXX $CXXFLAGS  -std=c++11 -Iinclude \
-	$SRC/first_fuzzer.cc -o $OUT/0-first_fuzzer \
+	$SRC/first_fuzzer.cc -o $OUT/first_fuzzer-0 \
      $LIB_FUZZING_ENGINE 
 
-clang++ -g -std=c++11 -stdlib=libc++ -fsanitize-address-use-after-scope -fsanitize=address -fsanitize-coverage=trace-pc-guard -Iinclude $SRC/first_fuzzer.cc -o $OUT/first_fuzzer $LIB_FUZZING_ENGINE
+clang++ -g -std=c++11 -stdlib=libc++ -fsanitize-address-use-after-scope -fsanitize=address,fuzzer  -Iinclude $SRC/first_fuzzer.cc -o $OUT/first_fuzzer-1 $LIB_FUZZING_ENGINE
 
-clang++ -g -std=c++11 -stdlib=libc++ -fsanitize-address-use-after-scope -fsanitize=address,fuzzer -Iinclude $SRC/second_fuzzer.cc -o $OUT/second_fuzzer $LIB_FUZZING_ENGINE
+clang++ -g -std=c++11 -stdlib=libc++ -fsanitize-address-use-after-scope -fsanitize=address -Iinclude $SRC/first_fuzzer.cc -o $OUT/first_fuzzer-2 $LIB_FUZZING_ENGINE
 
-clang++ -g -std=c++11 -stdlib=libc++ -fsanitize-address-use-after-scope -fsanitize=fuzzer -fsanitize-coverage=trace-pc-guard -Iinclude $SRC/third_fuzzer.cc -o $OUT/third_fuzzer $LIB_FUZZING_ENGINE
